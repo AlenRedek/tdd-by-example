@@ -1,10 +1,10 @@
-import { Expression } from './expression';
+import { Expression, Sum } from './index';
 
 export class Money implements Expression {
-  private readonly amount: number;
-  private readonly currency: string;
+  public readonly amount: number;
+  public readonly currency: string;
 
-  protected constructor(amount: number, currency: string) {
+  public constructor(amount: number, currency: string) {
     this.amount = amount;
     this.currency = currency;
   }
@@ -32,6 +32,10 @@ export class Money implements Expression {
   }
 
   public plus(addend: Money): Expression {
-    return new Money(this.amount + addend.amount, this.currency);
+    return new Sum(this, addend);
+  }
+
+  public reduce(to: string): Money {
+    return this;
   }
 }

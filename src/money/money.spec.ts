@@ -1,6 +1,4 @@
-import { Bank } from './bank';
-import { Expression } from './expression';
-import { Money } from './money';
+import { Bank, Expression, Money, Sum } from './index';
 
 describe('Dollar', () => {
   it('should multiply', () => {
@@ -26,5 +24,25 @@ describe('Dollar', () => {
     const bank: Bank = new Bank();
     const reduced: Money = bank.reduce(sum, 'USD');
     expect(Money.dollar(10)).toEqual(reduced);
+  });
+
+  it('should test whether plus returns sum', () => {
+    const five: Money = Money.dollar(5);
+    const result: Expression = five.plus(five);
+    expect(five).toEqual((result as Sum).augend);
+    expect(five).toEqual((result as Sum).addend);
+  });
+
+  it('should reduce the sum', () => {
+    const sum: Expression = new Sum(Money.dollar(3), Money.dollar(4));
+    const bank: Bank = new Bank();
+    const result: Money = bank.reduce(sum, 'USD');
+    expect(Money.dollar(7)).toEqual(result);
+  });
+
+  it('should reduce the money', () => {
+    const bank: Bank = new Bank();
+    const result: Money = bank.reduce(Money.dollar(1), 'USD');
+    expect(Money.dollar(1)).toEqual(result);
   });
 });

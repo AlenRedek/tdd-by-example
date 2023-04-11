@@ -1,15 +1,13 @@
-export class Dollar {
-  private readonly amount: number;
+import { Money } from './money';
 
+export class Dollar extends Money {
   public constructor(amount: number) {
+    super();
+
     this.amount = amount;
   }
 
   public times(multiplier: number): Dollar {
     return new Dollar(this.amount * multiplier);
-  }
-
-  public equals(dollar: Dollar): boolean {
-    return this.amount === dollar.amount;
   }
 }

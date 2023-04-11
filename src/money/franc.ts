@@ -1,13 +1,11 @@
 import { Money } from './index';
 
 export class Franc extends Money {
-  public constructor(amount: number) {
-    super();
-
-    this.amount = amount;
+  public constructor(amount: number, currency: string) {
+    super(amount, currency);
   }
 
   public times(multiplier: number): Money {
-    return new Franc(this.amount * multiplier);
+    return Money.franc(this.amount * multiplier);
   }
 }

@@ -1,8 +1,6 @@
-import { Dollar, Franc } from './index';
-
 export class Money {
-  protected amount: number;
-  protected currency: string;
+  private readonly amount: number;
+  private readonly currency: string;
 
   protected constructor(amount: number, currency: string) {
     this.amount = amount;
@@ -10,11 +8,11 @@ export class Money {
   }
 
   public static dollar(amount: number): Money {
-    return new Dollar(amount, 'USD');
+    return new Money(amount, 'USD');
   }
 
   public static franc(amount: number): Money {
-    return new Franc(amount, 'CHF');
+    return new Money(amount, 'CHF');
   }
 
   public getCurrency(): string {
@@ -25,9 +23,9 @@ export class Money {
     return new Money(this.amount * multiplier, this.currency);
   }
 
-  public equals(money: any): boolean {
+  public equals(money: Money): boolean {
     return (
-      this.amount === money.amount && this.currency === money.getCurrency()
+      this.amount === money.amount && this.getCurrency() === money.getCurrency()
     );
   }
 }

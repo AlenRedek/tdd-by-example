@@ -1,0 +1,14 @@
+{
+  "name": "tdd-by-example",
+  "version": "1.0.0",
+  "author": "Alen Redek <<alen@redek.me>>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
+}

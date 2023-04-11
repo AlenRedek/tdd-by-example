@@ -1,4 +1,4 @@
-import { Expression, Sum } from './index';
+import { Bank, Expression, Sum } from './index';
 
 export class Money implements Expression {
   public readonly amount: number;
@@ -35,7 +35,9 @@ export class Money implements Expression {
     return new Sum(this, addend);
   }
 
-  public reduce(to: string): Money {
-    return this;
+  public reduce(bank: Bank, to: string): Money {
+    const rate: number = bank.rate(this.currency, to);
+
+    return new Money(this.amount / rate, to);
   }
 }

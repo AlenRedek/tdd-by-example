@@ -40,9 +40,20 @@ describe('Dollar', () => {
     expect(Money.dollar(7)).toEqual(result);
   });
 
-  it('should reduce the money', () => {
+  it('should reduce equal currencies', () => {
     const bank: Bank = new Bank();
     const result: Money = bank.reduce(Money.dollar(1), 'USD');
     expect(Money.dollar(1)).toEqual(result);
+  });
+
+  it('should reduce different currencies', () => {
+    const bank: Bank = new Bank();
+    bank.addRate('CHF', 'USD', 2);
+    const result: Money = bank.reduce(Money.franc(2), 'USD');
+    expect(Money.dollar(1)).toEqual(result);
+  });
+
+  it('should test for identical rates', () => {
+    expect(1).toEqual(new Bank().rate('USD', 'USD'));
   });
 });

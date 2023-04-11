@@ -7,10 +7,6 @@ export class Pair {
     this.to = to;
   }
 
-  public equals(pair: Pair): boolean {
-    return this.from === pair.from && this.to === pair.to;
-  }
-
   public hashCode(): number {
     return 0;
   }

@@ -1,3 +1,5 @@
+import { Bank } from './bank';
+import { Expression } from './expression';
 import { Money } from './money';
 
 describe('Dollar', () => {
@@ -19,7 +21,10 @@ describe('Dollar', () => {
   });
 
   it('should test for addition', () => {
-    const sum: Money = Money.dollar(5).plus(Money.dollar(5));
-    expect(sum).toEqual(Money.dollar(10));
+    const five: Money = Money.dollar(5);
+    const sum: Expression = five.plus(five);
+    const bank: Bank = new Bank();
+    const reduced: Money = bank.reduce(sum, 'USD');
+    expect(Money.dollar(10)).toEqual(reduced);
   });
 });

@@ -1,4 +1,4 @@
-import { Money } from './money';
+import { Money } from './index';
 
 export class Franc extends Money {
   public constructor(amount: number) {
@@ -7,7 +7,7 @@ export class Franc extends Money {
     this.amount = amount;
   }
 
-  public times(multiplier: number): Franc {
+  public times(multiplier: number): Money {
     return new Franc(this.amount * multiplier);
   }
 }

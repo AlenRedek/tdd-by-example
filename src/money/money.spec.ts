@@ -57,3 +57,34 @@ describe('Dollar', () => {
     expect(1).toEqual(new Bank().rate('USD', 'USD'));
   });
 });
+
+describe('Sum', () => {
+  it('Mixed addition', () => {
+    const fiveBucks: Expression = Money.dollar(5);
+    const tenFranks: Expression = Money.franc(10);
+    const bank: Bank = new Bank();
+    bank.addRate('CHF', 'USD', 2);
+    const result: Money = bank.reduce(fiveBucks.plus(tenFranks), 'USD');
+    expect(Money.dollar(10)).toEqual(result);
+  });
+
+  it('Sum plus money', () => {
+    const fiveBucks: Expression = Money.dollar(5);
+    const tenFranks: Expression = Money.franc(10);
+    const bank: Bank = new Bank();
+    bank.addRate('CHF', 'USD', 2);
+    const sum: Expression = new Sum(fiveBucks, tenFranks).plus(fiveBucks);
+    const result: Money = bank.reduce(sum, 'USD');
+    expect(Money.dollar(15)).toEqual(result);
+  });
+
+  it('Sum times', () => {
+    const fiveBucks: Expression = Money.dollar(5);
+    const tenFranks: Expression = Money.franc(10);
+    const bank: Bank = new Bank();
+    bank.addRate('CHF', 'USD', 2);
+    const sum: Expression = new Sum(fiveBucks, tenFranks).times(2);
+    const result: Money = bank.reduce(sum, 'USD');
+    expect(Money.dollar(20)).toEqual(result);
+  });
+});
